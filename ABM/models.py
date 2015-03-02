@@ -5,6 +5,20 @@ from django.core.validators import RegexValidator
 
 
 # Create your models here.
+class Rol(models.Model):
+
+    MEDICO = 'MD'
+    SECRETARIA = 'SC'
+
+    TIPOS_DE_ROLES = (
+        (MEDICO, 'Medico'),
+        (SECRETARIA, 'Secretaria')
+    )
+
+    rol_text = models.CharField(max_length=200, choice = TIPOS_DE_ROLES)
+
+
+
 class Persona(models.Model):
     nombre_text = models.CharField(max_length=200)
     apellido_text = models.CharField(max_length=200)
@@ -13,6 +27,7 @@ class Persona(models.Model):
     telefono_text = models.CharField(max_length=200,
                                      validators=[RegexValidator(regex='^\d{10}$', message='Length has to be 10', code='Invalid number')])
     dni_number = models.IntegerField(max_length=8)
+
 
     class Meta:
         abstract = True
